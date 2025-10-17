@@ -23,7 +23,7 @@ def sample_run_anonymizer(
             start=start, end=end, 
             score=0.8
             )
-        ]
+        ],
         operators={
             "PERSON": OperatorConfig
             ("replace", {"new_value": "BIP"}
