@@ -55,5 +55,5 @@ def sample_run_anonymizer():
 '''
 
 if __name__ == "__main__":
-    result = sample_run_anonymizer("My name is Bond.", 11, 15)
+    result = sample_run_anonymizer("My name is Bond.", 11, 15);
     print(result)
