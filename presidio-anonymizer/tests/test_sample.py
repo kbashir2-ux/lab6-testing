@@ -6,7 +6,7 @@ def test_sample_run_anonymizer():
     start = 11
     end = 15
 
-    result = sample_run_anonymizer("My name is Bond.", 11, 15)
+    #result = sample_run_anonymizer("My name is Bond.", 11, 15)
     result = sample_run_anonymizer(text, start, end)
     
     assert result.text == "My name is BIP."
