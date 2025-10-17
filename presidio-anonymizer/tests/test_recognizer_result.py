@@ -285,6 +285,54 @@ def test_given_negative_start_or_endpoint_then_we_fail(start, end):
         create_recognizer_result("entity", 0, start, end)
 
 
+########Part1
+@pytest.mark.parametrize(
+    "first_start, first_end, second_start, second_end, expected_intersection",
+    [
+        # No overlap (second completely after first)
+        (0, 5, 6, 10, 0),
+
+        # No overlap (second completely before first)
+        (6, 10, 0, 5, 0),
+
+        # Full overlap (second inside first)
+        (0, 10, 2, 8, 6),
+
+        # Full overlap (first inside second)
+        (2, 8, 0, 10, 6),
+
+        # Partial overlap (end of first overlaps start of second)
+        (0, 6, 4, 10, 2),
+
+        # Partial overlap (start of first overlaps end of second)
+        (4, 10, 0, 6, 2),
+
+        # Complete containment (exact match)
+        (0, 10, 0, 10, 10),
+
+        # Exact-touch boundaries (end == start, no overlap)
+        (0, 5, 5, 10, 0),
+
+        # Exact-touch boundaries (start == end, no overlap)
+        (5, 10, 0, 5, 0),
+
+        # Single point overlap (start == end inside range)
+        (0, 5, 5, 5, 0),  # Since end==start but zero-length overlap
+
+        # Single character overlap
+        (0, 6, 5, 10, 1),
+    ],
+)
+def test_intersects(first_start, first_end, second_start, second_end, expected_intersection):
+    first = create_recognizer_result("entity", 0.5, first_start, first_end)
+    second = create_recognizer_result("entity", 0.5, second_start, second_end)
+
+    assert first.intersects(second) == expected_intersection
+
+########
+
+
+
 def create_recognizer_result(entity_type: str, score: float, start: int, end: int):
     data = {"entity_type": entity_type, "score": score, "start": start, "end": end}
     return RecognizerResult.from_json(data)
