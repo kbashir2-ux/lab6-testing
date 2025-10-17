@@ -11,7 +11,7 @@ def test_sample_run_anonymizer():
     
     assert result.text == "My name is BIP."
     assert len(result.items) == 1
-
+    
     assert result.items[0].start == start
     assert result.items[0].end == 14 
     assert result.items[0].entity_type == "PERSON"

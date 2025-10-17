@@ -19,7 +19,7 @@ def sample_run_anonymizer(text:str, start:int, end:int):
             }
     )
 
-    return(result)
+    return result
 
 if __name__ == "__main__":
     result = sample_run_anonymizer("My name is Bond.", 11, 15);
